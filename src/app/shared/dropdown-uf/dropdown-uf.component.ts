@@ -13,6 +13,7 @@ export class DropdownUfComponent implements OnInit{
   @Input() label: string = '';
   @Input() iconePrefixo: string = ''; 
   @Input() control!: FormControl;
+  @Input() placeholder: string = '';
 
   unidadesFederativas: UnidadeFederativa[] = [];
 
@@ -34,12 +35,17 @@ export class DropdownUfComponent implements OnInit{
     )
   }
 
-  filtrarUfs(value: string): UnidadeFederativa[] {
-    const valorFiltrado = value?.toLowerCase();
+  filtrarUfs(value: string | UnidadeFederativa): UnidadeFederativa[] {
+    const nomeUf = typeof value === 'string' ? value : value?.nome;
+    const valorFiltrado = nomeUf?.toLowerCase();
     const result = this.unidadesFederativas.filter(
       estado => estado.nome.toLowerCase().includes(valorFiltrado)
     )
     return result
+  }
+
+  displayFn(estado: UnidadeFederativa): string {
+    return estado && estado.nome ? estado.nome : '';
   }
 
 }

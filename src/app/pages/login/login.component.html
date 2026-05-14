@@ -1,0 +1,49 @@
+<app-banner 
+    src="assets/imagens/banner-login.png"
+    alt="Banner de Login">
+</app-banner>
+<section class="login-component">
+    <mat-card class="login">
+        <div class="image-container">
+            <figure>
+                <img src="assets/imagens/simbolo-bussola.png" 
+                alt="Símbolo de uma bussola">
+            </figure>
+        </div>
+        <div class="form-container">
+            <mat-card-header>
+                <mat-card-title>Login</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="loginForm">
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>E-mail</mat-label>
+                        <input formControlName="email" matInput type="email" placeholder="Digite seu email" required>
+                        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">
+                            O e-mail é obrigatório
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">
+                            Digite um e-mail válido
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Senha</mat-label>
+                        <input formControlName="password" matInput type="password" placeholder="Digite sua senha" required>
+                        <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">
+                            A senha é obrigatória
+                        </mat-error>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button [disabled]="!loginForm.valid" (click)="login()" mat-flat-button color="primary" type="submit">
+                        Acessar Minha Conta
+                    </button>
+                </mat-card-actions>
+                <p>
+                    Ainda não tem uma conta? 
+                    <a href="/cadastro">Cadastre-se aqui</a>
+                </p>
+            </form>
+        </div>
+    </mat-card>
+</section>
